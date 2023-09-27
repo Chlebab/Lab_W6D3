@@ -44,6 +44,12 @@ class Cinema{
   
   return totalLength
   }
+  filmsByProperty(key, value){
+    //const propkey = film.key
+    // const propvalue = value
+    const filmsFound = this.films.filter((film) => film[key] == value)
+    return filmsFound
+  }
 
 }
 

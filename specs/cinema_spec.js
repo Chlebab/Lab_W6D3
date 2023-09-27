@@ -68,6 +68,10 @@ describe('Cinema', function () {
     const actual = cinema.totalLength()
     assert.strictEqual(actual, 622)
 
-  });
+  })
+  it('should be able to filter films by a parameter and match on the given value',function(){
+    const actual = cinema.filmsByProperty('genre', "history")
+    assert.deepStrictEqual(actual, [dunkirk])
 
+  });
 });
