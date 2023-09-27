@@ -19,6 +19,7 @@ describe('Cinema', function () {
     blackPanther = new Film('Black Panther', 'action', 2018, 134);
     trainspotting = new Film('T2 Trainspotting', 'drama', 2017, 117);
 
+
     films = [moonlight, bladeRunner, dunkirk, blackPanther, trainspotting];
     cinema = new Cinema(films);
   });
@@ -29,20 +30,44 @@ describe('Cinema', function () {
   });
 
   it('should be able to get a list of film titles', function(){
-    cinema.addFilm(moonlight)
-    cinema.addFilm(bladeRunner)
-    cinema.addFilm(dunkirk)
-    cinema.addFilm(blackPanther)
-    cinema.addFilm(trainspotting)
-    const actual = getTitles()
-    assert.deepStrictEqual(actual, ['Moonlight', 'bladeRunner', 'dunkirk', 'blackPanther', 'trainspotting'])
+    const actual = cinema.getTitles()
+    assert.deepStrictEqual(actual, ['Moonlight', 'Blade Runner 2049', 'Dunkirk', 'Black Panther', 'T2 Trainspotting'])
+  });
+
+  it('should be able to find a film by title',function(){
+    const actual = cinema.findTitle(moonlight)
+    assert.strictEqual(actual, 'Moonlight')
+  });
+
+  it('should be able to filter films by genre', function(){
+    const actual = cinema.findGenre("drama")
+    assert.deepStrictEqual(actual, [moonlight, trainspotting])
+  });
+
+  it('should be able to check whether there are some films from a particular year',function(){
+    const actual = cinema.findYear(2017)
+    assert.deepStrictEqual(actual, [bladeRunner, dunkirk, trainspotting])
+  });
+
+  it('should be able to check whether there are no films from a particular year', function(){
+  const actual = cinema.findYear(2023)
+  assert.deepStrictEqual(actual, [])
+  });
+
+  it('should be able to check whether all films are over a particular length',function(){
+  const actual = cinema.filmLength(60)
+  assert.deepStrictEqual(actual, films)
+  });
+
+  xit('should be able to return length table of all films',function(){
+    const actual = cinema.lengthTable()
+    assert.deepStrictEqual(actual, [])
 
   });
-  it('should be able to find a film by title');
-  it('should be able to filter films by genre');
-  it('should be able to check whether there are some films from a particular year');
-  it('should be able to check whether there are no films from a particular year');
-  it('should be able to check whether all films are over a particular length');
-  it('should be able to calculate total running time of all films');
+  it('should be able to calculate total running time of all films',function(){
+    const actual = cinema.totalLength()
+    assert.strictEqual(actual, 622)
+
+  });
 
 });
